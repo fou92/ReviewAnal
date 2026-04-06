@@ -10,4 +10,3 @@ def text_similarity(text1, text2):
     similarity = util.cos_sim(embeddings[0], embeddings[1])
 
     return float(similarity)
-
