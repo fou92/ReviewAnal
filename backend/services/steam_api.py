@@ -9,7 +9,6 @@ def get_reviews(app_id):
         "num_per_page": 100,
         "language": "korean"
     }
-
     r=requests.get(url,params=params).json()
 
     return [review["review"] for review in r["reviews"]]
