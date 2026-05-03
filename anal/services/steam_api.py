@@ -1,4 +1,6 @@
 import requests
+from similarity import analyze_need
+from sentence_transformers import SentenceTransformer
 
 def get_reviews(app_id):
 
@@ -12,3 +14,9 @@ def get_reviews(app_id):
     r=requests.get(url,params=params).json()
 
     return [review["review"] for review in r["reviews"]]
+
+def to_sim(need, reviews, model="jhgan/ko-sroberta-multitask"):
+    model = SentenceTransformer(model)
+    sims = analyze_need(need, reviews, model)
+    sims.sort(key=lambda x: x["score"], reverse=True)
+    return sims

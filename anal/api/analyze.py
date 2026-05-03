@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 from services.steam_api import get_reviews
 from services.similarity import analyze_need
-# from services.similarity impo
-
 
 router = APIRouter()
 
