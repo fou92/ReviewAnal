@@ -11,3 +11,6 @@ async def index(request: Request):
     return templates.TemplateResponse(name="index.html", request={"request": request})
 
 # app.include_router(router)
+@app.post("/")
+async def result(request: Request):
+    return templates.TemplateResponse(name="index.html", request={"request": request})

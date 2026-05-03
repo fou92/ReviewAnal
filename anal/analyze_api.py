@@ -4,7 +4,6 @@ from services.similarity import analyze_need
 router = APIRouter()
 
 @router.post("/analyze")
-
 def analyze(data: dict):
     user_need = data["need"]
     game_id = data["game_id"]

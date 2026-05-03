@@ -1,0 +1,10 @@
+body{
+    margin: 0 auto;
+    background-color: cyan;
+}
+
+.user-input{
+    margin-top: 100px;
+    margin-right: 10%;
+    margin-left: 10%;
+}

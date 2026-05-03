@@ -1,6 +1,7 @@
 async function analyze(){
 
-    const need = document.getElementById("need").value
+    const need = document.getElementsByClassName("need").value
+    const url = document.getElementsByClassName("search_bar").value
 
     const res = await fetch("http://localhost:8000/analyze",{
         method:"POST",
