@@ -5,11 +5,6 @@ from services.similarity import analyze_need
 from services.steam_api import get_reviews
 
 app = FastAPI()
-model = SentenceTransformer('all-MiniLM-L6-v2')
-
-class RequestData(BaseModel):
-    url: str
-    need: list[str]
 
 def analyze(url, need):
     reviews = get_reviews(url)

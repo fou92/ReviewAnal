@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from sentence_transformers import SentenceTransformer
-
 from api.analyze import analyze, RequestData
 from services.steam_api import get_reviews
 
 app = FastAPI()
+
+class RequestData(BaseModel):
+    url: str
+    need: str
 
 templates = Jinja2Templates(directory = "templates")
 
@@ -15,8 +18,10 @@ async def index(request: Request):
 
 @app.post("/analyze")
 async def analyze(data: RequestData):
-    model = SentenceTransformer("")
+    url = data.url
+    need = data.need
 
-    reviews = get_reviews(data.url)
-    res = analyze(data.url, data.need)
+    reviews = get_reviews(url)
+    res = analyze(url, need)
     return templates.TemplateResponse(res)
+
