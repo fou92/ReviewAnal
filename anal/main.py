@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
-from sentence_transformers import SentenceTransformer
 from starlette.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from api.analyze import similarity_analyze as analyze, similarity_analyze
 from services.steam_api import get_reviews
@@ -17,6 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 class RequestData(BaseModel):
     url: str
     need: str
@@ -28,7 +30,7 @@ async def index(request: Request):
     return templates.TemplateResponse(name="index.html", request={"request": request})
 
 @app.post("/analyze")
-async def analyze(data: RequestData):
+async def analyze_api(data: RequestData):
     url = data.url
     need = data.need
 

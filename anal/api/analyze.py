@@ -10,10 +10,12 @@ def similarity_analyze(url, need):
     model = SentenceTransformer('all-MiniLM-L6-v2')
     scores = analyze_need(need, reviews, model)
 
-    descending_sorted = sorted(scores, key=scores.get, reverse=True)
+    descending_sorted = sorted(scores, reverse=True)
 
     top50 = descending_sorted[:50]
+
+    mean = sum(top50)/len(top50)
     return {
-        "score": float(top50.mean())
+        "score": float(mean)
     }
 #
