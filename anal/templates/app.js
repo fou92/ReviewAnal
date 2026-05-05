@@ -1,7 +1,7 @@
 async function analyze(){
 
-    const need = document.getElementsByClassName("need")[0].value;
-    const url = document.getElementsByClassName("urlinput")[0].value;
+    const need = document.querySelector(".need").value;
+    const url = document.querySelector(".urlinput").value;
 
     const res = await fetch("http://localhost:8000/analyze",{
         method:"POST",
@@ -12,13 +12,13 @@ async function analyze(){
             url:url,
             need:need
         })
-    })
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
-    const percentage_score = Math.round(10000*data.score)/100
+    const percentage_score = Math.round(10000*data.score)/100;
 
-    const resultEl =document.getElementsByClassName("result")[0];
+    const resultEl =document.querySelector(".result");
 
     resultEl.innerText = percentage_score+"%"
 }
