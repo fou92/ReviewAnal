@@ -1,10 +1,13 @@
 body{
     margin: 0 auto;
-    background-color: cyan;
+    background-color: rgb(106 236 218 / 0.87);
+}
+
+.container{
+    margin-top: 100px;
 }
 
 .user-input{
-    margin-top: 100px;
     margin-right: 10%;
     margin-left: 10%;
 }

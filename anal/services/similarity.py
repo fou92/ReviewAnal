@@ -1,6 +1,5 @@
 from sentence_transformers import util
-from steam_api import get_reviews
-# from json import
+
 
 def analyze_need(user_need, reviews, model):
     user_emb = model.encode(user_need)

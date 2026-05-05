@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href = "style.css">
 </head>
 <body>
 <div class="container">
     <div class="find-by-url">
-        <input id="search_bar" placeholder="스팀 url 입력">
+        <input id="urlinput" placeholder="스팀 url 입력">
     </div>
     <div class="user-input">
         <input id="need" placeholder="원하는 게임 특징 입력">
         <button onclick="analyze()" class="analyze">분석</button>
     </div>
     <div id="result_div">
-        <span id="result"></span>
+        결과:<span id="result"></span>
     </div>
 </div>
 <script src="app.js"></script>
