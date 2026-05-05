@@ -1,13 +1,69 @@
-body{
-    margin: 0 auto;
-    background-color: rgb(106 236 218 / 0.87);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 
-.container{
-    margin-top: 100px;
+.container {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.user-input{
-    margin-right: 10%;
-    margin-left: 10%;
+/* URL 입력 */
+.find-by-url input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #333;
+    border-radius: 6px;
+}
+
+/* 니즈 + 버튼 */
+.user-input {
+    display: flex;
+    width: 628px;
+    gap: 15px;
+}
+
+.user-input input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #333;
+    border-radius: 6px;
+}
+
+.analyze {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.analyze:hover {
+    background-color: #555;
+}
+
+/* 결과 퍼센트 */
+#result_div {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* 설명 박스 */
+.result-box {
+    height: 120px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: white;
 }
