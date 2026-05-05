@@ -1,12 +1,11 @@
 from fastapi import FastAPI
 from sentence_transformers import SentenceTransformer
-from pydantic import BaseModel
 from services.similarity import analyze_need
 from services.steam_api import get_reviews
 
 app = FastAPI()
 
-def analyze(url, need):
+def similarity_analyze(url, need):
     reviews = get_reviews(url)
     model = SentenceTransformer('all-MiniLM-L6-v2')
     scores = analyze_need(need, reviews, model)
@@ -17,3 +16,4 @@ def analyze(url, need):
     return {
         "score": float(top50.mean())
     }
+#
