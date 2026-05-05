@@ -18,7 +18,7 @@ async function analyze(){
 
     const percentage_score = Math.round(10000*data.score)/100
 
-    const resultEl =document.getElementsByClassName("result");
+    const resultEl =document.getElementsByClassName("result")[0];
 
     resultEl.innerText = percentage_score+"%"
 }
