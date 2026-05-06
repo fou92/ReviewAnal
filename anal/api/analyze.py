@@ -5,7 +5,7 @@ def similarity_analyze(url, need, model):
     reviews = get_reviews(url)
     scores = analyze_need(need, reviews, model)
 
-    scores_list = scores.tolist()
+    scores_list = scores.tolist()[0]
 
     descending_sorted = sorted(scores_list, reverse=True)
     top50 = descending_sorted[:50]
@@ -15,4 +15,3 @@ def similarity_analyze(url, need, model):
     return {
         "score": score
     }
-#redeployyy

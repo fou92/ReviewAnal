@@ -14,7 +14,8 @@ async function analyze(){
         })
     });
 
-    const data = await res.json();
+    const data = await res.text();
+    console.log(data)
     const percentage_score = Math.round(10000*data.score)/100;
     const resultEl =document.querySelector(".result");
 
