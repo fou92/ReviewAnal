@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 개발용
+    allow_origins=["https://strev.fastapicloud.dev/"],  # 개발용
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]

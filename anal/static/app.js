@@ -3,7 +3,7 @@ async function analyze(){
     const need = document.querySelector(".need").value;
     const url = document.querySelector(".urlinput").value;
 
-    const res = await fetch("http://localhost:8000/analyze",{
+    const res = await fetch("https://strev.fastapicloud.dev/analyze",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
