@@ -5,6 +5,6 @@ def analyze_need(user_need, reviews, model):
     user_emb = model.encode(user_need)
     review_emb = model.encode(reviews)
 
-    scores = util.cos_sim(user_emb, review_emb)
+    scores = util.cos_sim(user_emb, review_emb)[0]
 
     return scores
