@@ -13,10 +13,8 @@ def similarity_analyze(url, need):
     descending_sorted = sorted(scores_list, reverse=True)
     top50 = descending_sorted[:50]
 
-
     mean = sum(top50)/len(top50)
 
     return {
         "score": float(mean)
     }
-#
