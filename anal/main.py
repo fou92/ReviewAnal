@@ -3,19 +3,20 @@ from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
-
-from api.analyze import similarity_analyze as analyze, similarity_analyze
+from sentence_transformers import SentenceTransformer
+from api.analyze import similarity_analyze
 from services.steam_api import get_reviews
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://strev.fastapicloud.dev/"],  # 개발용
+    allow_origins=["https://strev.fastapicloud.dev"],  # 개발용
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
+model = SentenceTransformer('all-MiniLM-L6-v2')
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -34,7 +35,6 @@ async def analyze_api(data: RequestData):
     url = data.url
     need = data.need
 
-    reviews = get_reviews(url)
-    res = similarity_analyze(url, need)
+    res = similarity_analyze(url, need, model)
     return res
-
+# redeploy

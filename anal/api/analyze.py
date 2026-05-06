@@ -1,11 +1,8 @@
-from fastapi import FastAPI
-from sentence_transformers import SentenceTransformer
 from services.similarity import analyze_need
 from services.steam_api import get_reviews
 
-def similarity_analyze(url, need):
+def similarity_analyze(url, need, model):
     reviews = get_reviews(url)
-    model = SentenceTransformer('all-MiniLM-L6-v2')
     scores = analyze_need(need, reviews, model)
 
     scores_list = scores.tolist()
@@ -14,7 +11,7 @@ def similarity_analyze(url, need):
     top50 = descending_sorted[:50]
 
     mean = sum(top50)/len(top50)
-
+    score = float(mean)
     return {
-        "score": float(mean)
+        "score": score
     }
