@@ -6,6 +6,7 @@ from starlette.staticfiles import StaticFiles
 from sentence_transformers import SentenceTransformer
 from api.analyze import similarity_analyze
 from dotenv import load_dotenv
+from services.steam_api import get_reviews
 import os
 
 load_dotenv()
@@ -42,4 +43,3 @@ async def analyze_api(data: RequestData):
 
     res = similarity_analyze(url, need, model)
     return res
-# redeploy3232323
