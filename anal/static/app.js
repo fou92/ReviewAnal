@@ -19,4 +19,5 @@ async function analyze(){
     const resultEl =document.querySelector(".result");
 
     resultEl.innerText = percentage_score+"%"
+    // 4:32테스트
 }
