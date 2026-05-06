@@ -7,8 +7,6 @@ from sentence_transformers import SentenceTransformer
 from api.analyze import similarity_analyze
 import os
 
-os.environ["HF_TOKEN"] = "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"
-
 app = FastAPI()
 
 app.add_middleware(
