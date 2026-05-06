@@ -5,7 +5,9 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 from sentence_transformers import SentenceTransformer
 from api.analyze import similarity_analyze
-from services.steam_api import get_reviews
+import os
+
+os.environ["HF_TOKEN"] = "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"
 
 app = FastAPI()
 
