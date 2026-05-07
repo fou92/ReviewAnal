@@ -13,7 +13,7 @@ load_dotenv()
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://strev.fastapicloud.dev"],
@@ -24,13 +24,11 @@ app.add_middleware(
 
 model = SentenceTransformer('./models/paraphrase-MiniLM-L3-v2')
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory = "templates")
 
 class RequestData(BaseModel):
     url: str
     need: str
-
-templates = Jinja2Templates(directory = "templates")
 
 @app.get("/")
 async def index(request: Request):
