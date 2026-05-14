@@ -22,8 +22,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-model = SentenceTransformer('./models/paraphrase-MiniLM-L3-v2')
-
 templates = Jinja2Templates(directory = "templates")
 
 class RequestData(BaseModel):
@@ -36,8 +34,11 @@ async def index(request: Request):
 
 @app.post("/analyze")
 async def analyze_api(data: RequestData):
-    url = data.url
-    need = data.need
+    try:
+        url = data.url
+        need = data.need
 
-    res = similarity_analyze(url, need, model)
-    return res
+        res = similarity_analyze(url, need)
+        return res
+    except Exception as e:
+        return {"error": str(e)}
