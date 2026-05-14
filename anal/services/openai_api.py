@@ -23,7 +23,7 @@ def response_gpt(need, reviews):
                     "당신은 사용자에게서 리뷰 목록 그리고 사용자가 원하는 취향이 써져있는 텍스트로 두가지를 파라미터로 받을 것이다"
                     "사용자의 취향을 고려해서 추천할만한 이유 1-2줄 분량, 해당 게임의 강점을 #태그 형식으로 5개 정도 제시,"
                     "주의할 점으로 사용자가 안 좋아할만한 요소 1-2줄 분량으로 일러두기 그리고 리뷰를 종합하여 3줄 내외의 총평을 내리면 된다"
-                     "답변은 다음과 같은 형식으로 대답하면 된다."
+                     "답변은 다음과 같은 형식으로 대답하면 된다.\n\n\n"
                      "추천 이유:\n"
                      "당신이 대답해야하는 추천할만한 이유\n"
                      "좋은 평가:\n"
@@ -35,8 +35,3 @@ def response_gpt(need, reviews):
     )
 
     return response.output_text
-
-from services.steam_api import get_reviews
-reviews = get_reviews("https://store.steampowered.com/app/1086940/Baldurs_Gate_3/")
-need="스토리가 좋은 게임"
-print(response_gpt(need, reviews))
