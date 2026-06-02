@@ -1,12 +1,14 @@
 from fastapi import FastAPI, Request
+from fsspec.implementations import data
 from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
-from sentence_transformers import SentenceTransformer
 from api.analyze import similarity_analyze
 from dotenv import load_dotenv
-from services.steam_api import get_reviews
+from api.cache import load_reviews
+from api.openai_api import response_gpt
+from services.steam_api import url_to_id, get_reviews
 import os
 
 load_dotenv()
@@ -39,6 +41,17 @@ async def analyze_api(data: RequestData):
         need = data.need
 
         res = similarity_analyze(url, need)
+        return res
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.post("/gpt")
+async def gpt(data: RequestData):
+    try:
+        need = data.need
+        revs = load_reviews(url_to_id(data.url))
+
+        res = response_gpt(need, revs)
         return res
     except Exception as e:
         return {"error": str(e)}

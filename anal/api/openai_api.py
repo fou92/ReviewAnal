@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from openai import OpenAI
+from services.steam_api import get_reviews
 
 import os
 
@@ -9,7 +10,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def response_gpt(need, reviews):
-    MODEL = "gpt-5.2"
+    MODEL = "gpt-5.4-nano"
 
     review_prompt = ""
     for review in reviews:
@@ -25,13 +26,13 @@ def response_gpt(need, reviews):
                     "주의할 점으로 사용자가 안 좋아할만한 요소 1-2줄 분량으로 일러두기 그리고 리뷰를 종합하여 3줄 내외의 총평을 내리면 된다"
                      "답변은 다음과 같은 형식으로 대답하면 된다.\n\n\n"
                      "추천 이유:\n"
-                     "당신이 대답해야하는 추천할만한 이유\n"
+                     "당신이 대답해야하는 추천할만한 이유(1줄-2줄)\n"
                      "좋은 평가:\n"
-                     "#당신이 #제시할 #5가지 #정도의 #태그\n"
+                     "#당신이 #제시할 #5가지 #정도의 #태그(5가지 정도)\n"
                      "주의할 점:\n"
-                     "당신이 일러둬야할 단점\n\n"
-                     "당신이 내려야할 총평",
+                     "당신이 일러둬야할 단점(1줄-2줄)\n\n"
+                     "당신이 내려야할 총평(3줄 내외)",
         input=prompt
     )
 
-    return response.output_text
+    return {"desc":response.output_text}

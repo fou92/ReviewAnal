@@ -7,7 +7,7 @@ import requests
 
 def get_reviews(url, num_of_reviews=100, batch=10):
 
-    app_id = url.split("app")[-1].split("/")[1]
+    app_id = url_to_id(url)
     api_url = f"https://store.steampowered.com/appreviews/{app_id}"
     params = {
         "json": 1,
@@ -40,30 +40,17 @@ def get_reviews(url, num_of_reviews=100, batch=10):
         print_exc()
         return {"error": f"{str(e)} in get_reviews"}
 
-# returns image url as str
-def browse_img_src(url):
+
+def get_appdetail_data(app_id):
     try:
-        app_id = url.split("app")[-1].split("/")[1]
         api_url = "https://store.steampowered.com/api/appdetails"
         params = {"appids": app_id, "l": "korean"}
         response = requests.get(api_url, params=params)
         data = response.json()
-        return data[str(app_id)]["data"]["header_image"]
+        return data[str(app_id)]["data"]
     except Exception as e:
         print_exc()
-        return {"error": f"{str(e)} in browse_img_src"}
+        return {"error": f"{str(e)} in get_appdetail_data"}
 
-# returns game title as str
-def get_game_title(url):
-    try:
-        app_id = url.split("app")[-1].split("/")[1]
-        api_url = "https://store.steampowered.com/api/appdetails"
-        params = {"appids": app_id, "l":"korean"}
-
-        res = requests.get(api_url, params=params)
-        data = res.json()
-        return data[str(app_id)]["data"]["name"]
-
-    except Exception as e:
-        print_exc()
-        return {"error": f"{str(e)} in get_game_title"}
+def url_to_id(url):
+    return url.split("app")[-1].split("/")[1]
