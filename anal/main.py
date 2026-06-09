@@ -26,9 +26,18 @@ app.add_middleware(
 
 templates = Jinja2Templates(directory = "templates")
 
+class Preferences(BaseModel):
+    story: int
+    difficulty: int
+    action: int
+    strategy: int
+    free: int
+    calm: int
+
 class RequestData(BaseModel):
     url: str
     need: str
+    preferences: Preferences
 
 @app.get("/")
 async def index(request: Request):
@@ -39,8 +48,9 @@ async def analyze_api(data: RequestData):
     try:
         url = data.url
         need = data.need
+        prefs = data.preferences.model_dump()
+        res = similarity_analyze(url, need, prefs)
 
-        res = similarity_analyze(url, need)
         return res
     except Exception as e:
         return {"error": str(e)}
@@ -48,10 +58,15 @@ async def analyze_api(data: RequestData):
 @app.post("/gpt")
 async def gpt(data: RequestData):
     try:
-        need = data.need
+        if bool(data.need):
+            need = data.need
+        else:
+            need = "특이사항 없음"
         revs = load_reviews(url_to_id(data.url))
+        prefs = data.preferences.model_dump()
 
-        res = response_gpt(need, revs)
+        res = response_gpt(need, prefs, revs)
         return res
     except Exception as e:
         return {"error": str(e)}
+

@@ -9,19 +9,25 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
-def response_gpt(need, reviews):
+def response_gpt(need, prefs, reviews):
     MODEL = "gpt-5.4-nano"
 
     review_prompt = ""
     for review in reviews:
         review_prompt += review+"\n"
 
-    prompt = need+"\n\n"+review_prompt
+    pref_prompt = ""
+    for key, val in prefs.items():
+        pref_prompt += key+":"+str(val)+"%%"+"\n"
+
+    prompt = review_prompt+"\n\n"+"사용자의 취향:"+need+"\n\n"+"사용자의 선호요소\n"+pref_prompt
 
     response = client.responses.create(
         model=MODEL,
         instructions="당신은 이 게임이 취향에 맞을지 고민하는 사용자에게 결정을 할 수 있도록 도와주는 입장이다."
-                    "당신은 사용자에게서 리뷰 목록 그리고 사용자가 원하는 취향이 써져있는 텍스트로 두가지를 파라미터로 받을 것이다"
+                    "당신은 사용자에게서 리뷰 목록 그리고 요소별 사용자의 선호도하고 사용자가 원하는 취향이 써져있는 텍스트로 세 가지를 파라미터로 받을 것이다"
+                    "사용자의 선호도를 받았을 때 0인 요소가 있다면 그것을 배제하고 생각해라"
+                    "사용자의 취향이 비어있을 경우 사용자의 선호요소를 중점으로 참고해라"
                     "사용자의 취향을 고려해서 추천할만한 이유 1-2줄 분량, 해당 게임의 강점을 #태그 형식으로 5개 정도 제시,"
                     "주의할 점으로 사용자가 안 좋아할만한 요소 1-2줄 분량으로 일러두기 그리고 리뷰를 종합하여 3줄 내외의 총평을 내리면 된다"
                      "답변은 다음과 같은 형식으로 대답하면 된다.\n\n\n"

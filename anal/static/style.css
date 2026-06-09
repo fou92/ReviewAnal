@@ -24,6 +24,34 @@ body {
     border-radius: 6px;
 }
 
+.survey-box{
+    margin-top: 20px;
+    background-color: #ffffff;
+    border:2px solid #333333;
+    border-radius: 6px;
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.survey-item{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.survey-item span{
+    width:80px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.survey-item input{
+    flex:1;
+}
+
 /* 니즈 + 버튼 */
 .user-input {
     display: flex;
