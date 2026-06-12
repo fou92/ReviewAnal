@@ -13,9 +13,6 @@ from api.openai_api import response_gpt
 from services.steam_api import url_to_id, get_reviews
 import os
 
-load_dotenv()
-HF_TOKEN = os.getenv("HF_TOKEN")
-
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.add_middleware(

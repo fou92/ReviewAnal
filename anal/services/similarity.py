@@ -2,13 +2,13 @@ from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 import os
 
-load_dotenv()
-HF_TOKEN = os.getenv("HF_TOKEN")
-
-client = InferenceClient(
-    provider="auto",
-    api_key=HF_TOKEN,
-)
+# load_dotenv()
+# HF_TOKEN = os.getenv("HF_TOKEN")
+#
+# client = InferenceClient(
+#     provider="auto",
+#     api_key=HF_TOKEN,
+# )
 model = "sentence-transformers/paraphrase-MiniLM-L3-v2"
 
 # def get_embedding(text):
