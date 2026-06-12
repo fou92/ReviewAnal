@@ -1,3 +1,5 @@
+from traceback import print_exc
+
 from fastapi import FastAPI, Request
 from fsspec.implementations import data
 from pydantic import BaseModel
@@ -62,11 +64,12 @@ async def gpt(data: RequestData):
             need = data.need
         else:
             need = "특이사항 없음"
-        revs = load_reviews(url_to_id(data.url))
+        revs = get_reviews(data.url) # 와 시발 난 병신이야
         prefs = data.preferences.model_dump()
 
         res = response_gpt(need, prefs, revs)
         return res
     except Exception as e:
+        print_exc()
         return {"error": str(e)}
 

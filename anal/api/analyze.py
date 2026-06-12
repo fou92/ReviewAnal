@@ -7,7 +7,7 @@ def similarity_analyze(url, need, prefs):
     try:
         reviews = get_reviews(url)
         app_id = url_to_id(url)
-        save_reviews(app_id,reviews)
+        # save_reviews(app_id,reviews)
 
         pref_percent = {}
         for key,val in prefs.items():

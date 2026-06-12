@@ -14,6 +14,10 @@ async function analyze() {
 
     const preferences = getValues(preferenceIds)
 
+    const loading = document.querySelector(".loading-overlay");
+
+    loading.classList.remove("hidden");
+
     const res = await fetch("https://strev.fastapicloud.dev/analyze", {
         method: "POST",
         headers: {
@@ -64,6 +68,8 @@ async function analyze() {
 
     const infoPara = document.querySelector(".info");
     infoPara.innerText = gpt.desc;
+
+    loading.classList.add("hidden");
 }
 
 async function gptFront(){
@@ -100,5 +106,3 @@ function getValues(preferenceIds){
 
     return preferences
 }
-
-// 22:16
